@@ -7,6 +7,7 @@ public class Hooks extends Base{
 	
 	@Before
 	public void setUp() {
+		setupLogger();
 		initialiseDriver();
 	}
 	
