@@ -11,43 +11,60 @@ import java.util.logging.SimpleFormatter;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chromium.ChromiumDriver;
+import org.openqa.selenium.edge.EdgeDriver;
 
 import resources.DriverManager;
+import resources.Utils;
 
 public class Base {
 
 	private static WebDriver driver;
 	private static Logger logger = Logger.getLogger("Automation Logs");
-	
+
 	public void initialiseDriver() {
-		driver = new ChromeDriver();
+		String browser = System.getProperty("browser");
+		if(browser==null) {
+			browser = Utils.getGlobalValue("browser");
+		}
+		System.out.println(browser);
+		switch (browser) {
+		case "edge":
+			driver = new EdgeDriver();
+			break;
+		case "chrome":
+			driver = new ChromeDriver();
+			break;
+		default:
+			driver = new ChromeDriver();
+		}
 		DriverManager.setDriver(driver);
 		DriverManager.getDriver().manage().window().maximize();
 		DriverManager.getDriver().manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
 		DriverManager.getDriver().manage().timeouts().pageLoadTimeout(Duration.ofSeconds(20));
 	}
-	
+
 	public WebDriver getDriver() {
 		return DriverManager.getDriver();
 	}
-	
+
 	public void closeDriver() {
-		if(driver!=null) {
+		if (driver != null) {
 			DriverManager.quitDriver();
 		}
 	}
-	
-	public void setupLogger(){
+
+	public void setupLogger() {
 		LogManager.getLogManager().reset(); // Reset default configuration
-        logger.setLevel(Level.ALL);
+		logger.setLevel(Level.ALL);
 
-        // Console Handler
-        ConsoleHandler consoleHandler = new ConsoleHandler();
-        consoleHandler.setLevel(Level.ALL);
-        logger.addHandler(consoleHandler);
+		// Console Handler
+		ConsoleHandler consoleHandler = new ConsoleHandler();
+		consoleHandler.setLevel(Level.ALL);
+		logger.addHandler(consoleHandler);
 
-        // File Handler
-        FileHandler fileHandler = null;
+		// File Handler
+		FileHandler fileHandler = null;
 		try {
 			fileHandler = new FileHandler("application.log", true);
 		} catch (SecurityException e) {
@@ -57,11 +74,11 @@ public class Base {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-        fileHandler.setLevel(Level.ALL);
-        fileHandler.setFormatter(new SimpleFormatter());
-        logger.addHandler(fileHandler);
+		fileHandler.setLevel(Level.ALL);
+		fileHandler.setFormatter(new SimpleFormatter());
+		logger.addHandler(fileHandler);
 	}
-	
+
 	public Logger getLogger() {
 		return logger;
 	}
