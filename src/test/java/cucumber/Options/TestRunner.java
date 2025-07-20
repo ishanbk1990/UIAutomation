@@ -6,7 +6,8 @@ import io.cucumber.junit.CucumberOptions;
 
 @RunWith(Cucumber.class)
 @CucumberOptions(features = "src/test/java/Feature", glue = {
-		"stepDefinations" }, tags = "@regression", plugin = "json:target/jsonReports/cucumber-report.json")
+				"stepDefinations" }, tags = "@EndToEndFlow", 
+				plugin = "json:target/jsonReports/cucumber-report.json")
 public class TestRunner {
 
 }

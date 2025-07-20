@@ -1,7 +1,11 @@
 package stepDefinations;
 
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.TakesScreenshot;
+
 import io.cucumber.java.After;
 import io.cucumber.java.Before;
+import io.cucumber.java.Scenario;
 
 public class Hooks extends Base{
 	
@@ -12,7 +16,11 @@ public class Hooks extends Base{
 	}
 	
 	@After
-	public void tearDown() {
+	public void tearDown(Scenario scenario) {
+		 if (scenario.isFailed()) {
+	            byte[] screenshot = ((TakesScreenshot) getDriver()).getScreenshotAs(OutputType.BYTES);
+	            scenario.attach(screenshot, "image/png", "Failed Test Screenshot");
+	        }
 		closeDriver();
 	}
 

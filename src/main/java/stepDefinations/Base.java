@@ -12,6 +12,8 @@ import java.util.logging.SimpleFormatter;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 
+import resources.DriverManager;
+
 public class Base {
 
 	private static WebDriver driver;
@@ -19,17 +21,19 @@ public class Base {
 	
 	public void initialiseDriver() {
 		driver = new ChromeDriver();
-		driver.manage().window().maximize();
-		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+		DriverManager.setDriver(driver);
+		DriverManager.getDriver().manage().window().maximize();
+		DriverManager.getDriver().manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+		DriverManager.getDriver().manage().timeouts().pageLoadTimeout(Duration.ofSeconds(20));
 	}
 	
 	public WebDriver getDriver() {
-		return driver;
+		return DriverManager.getDriver();
 	}
 	
 	public void closeDriver() {
 		if(driver!=null) {
-			driver.quit();
+			DriverManager.quitDriver();
 		}
 	}
 	
