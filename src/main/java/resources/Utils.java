@@ -16,6 +16,10 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import stepDefinations.Base;
 
 public class Utils extends Base {
+	
+	private Utils(){
+		
+	}
 
 	public static String getGlobalValue(String key) {
 		Properties prop = new Properties();
