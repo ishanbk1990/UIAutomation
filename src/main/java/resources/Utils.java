@@ -13,9 +13,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import stepDefinations.Base;
-
-public class Utils extends Base {
+public class Utils{
 	
 	private Utils(){
 		

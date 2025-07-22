@@ -1,4 +1,9 @@
 -------------------------------------------------------------------------------
 Test set: cucumber.Options.TestRunner
 -------------------------------------------------------------------------------
-Tests run: 4, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 19.05 s -- in cucumber.Options.TestRunner
+Tests run: 2, Failures: 0, Errors: 1, Skipped: 0, Time elapsed: 20.19 s <<< FAILURE! -- in cucumber.Options.TestRunner
+Validate End to end flow #2.Verify the serach functionality working fine in Top deal -- Time elapsed: 3.974 s <<< ERROR!
+io.cucumber.java.PendingException: TODO: implement me
+	at stepDefinations.TopDealStepDefinations.i_navigate_to_top_deal_page(TopDealStepDefinations.java:12)
+	at ✽.I Navigate to Top deal Page(file:///C:/Users/Admin/eclipse-workspace/uiAutomation/src/test/resources/Feature/TopDeal.feature:7)
+

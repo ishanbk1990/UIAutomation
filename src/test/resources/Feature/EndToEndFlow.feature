@@ -10,7 +10,7 @@ Feature: Validate End to end flow
 		Then I verify user is on place order page
 		When I click on Place Order button
 		Then I verify user is on address details page
-		When I select I Select country and Accept the terms and conditions
+		When I Select country and Accept the terms and conditions
 		|Country|
 		|India|
 		And I click on Proceed button

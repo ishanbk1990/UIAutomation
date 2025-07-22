@@ -5,9 +5,12 @@ import io.cucumber.junit.Cucumber;
 import io.cucumber.junit.CucumberOptions;
 
 @RunWith(Cucumber.class)
-@CucumberOptions(features = "src/test/java/Feature", glue = {
-				"stepDefinations" }, tags = "@EndToEndFlow", 
-				plugin = "json:target/jsonReports/cucumber-report.json")
+@CucumberOptions(features = "src/test/resources/Feature", glue = {
+				"stepDefinations" }, tags = "@priceCheck", 
+				plugin = {"pretty",
+				        "io.qameta.allure.cucumber7jvm.AllureCucumber7Jvm",
+				        "json:target/jsonReports/cucumber-report.json"
+						})
 public class TestRunner {
 
 }

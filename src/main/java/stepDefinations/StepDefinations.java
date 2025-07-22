@@ -2,8 +2,10 @@ package stepDefinations;
 
 import java.util.List;
 import java.util.Map;
-
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.junit.Assert;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import io.cucumber.datatable.DataTable;
 import io.cucumber.java.en.Given;
@@ -13,28 +15,45 @@ import pageClasses.AddressPage;
 import pageClasses.CartPopUpPage;
 import pageClasses.CheckOutPage;
 import pageClasses.HomePage;
+import resources.DriverManager;
+import resources.ScenarioContext;
+import resources.TestContext;
 import resources.Utils;
 
-public class StepDefinations extends Base{
+public class StepDefinations{
 	
-	HomePage hp = new HomePage();
-	CartPopUpPage cp = new CartPopUpPage();
-	CheckOutPage co = new CheckOutPage();
-	AddressPage ap = new AddressPage();
+	private static final Logger logger = LogManager.getLogger(StepDefinations.class);
+	private final WebDriver driver;
+	private final TestContext context;
+    private final HomePage hp;
+    private final CartPopUpPage cp;
+    private final CheckOutPage co;
+    private final AddressPage ap;
+    private final ScenarioContext scenarioContext;
+    
+    public StepDefinations(TestContext context) {
+    	this.context = context;
+    	scenarioContext = context.getScenarioContext();
+    	this.driver = DriverManager.getDriver();
+    	hp = context.getHomePage();
+    	cp= context.getCartPopUpPage();
+    	co = context.getCheckOutPage();
+    	ap = context.getAddressPage();
+    }
 	
 	@Given("I launch the application")
 	public void i_launch_the_application() {
-		getDriver().get(Utils.getGlobalValue("baseUrl"));
-		getLogger().info("Application launched");
+		driver.get(Utils.getGlobalValue("baseUrl"));
+		logger.info("Application launched");
 	}
 
 	@When("I add {string} and {string}")
 	public void i_add_and(String itemName, String quantity) {
-		List<WebElement> listOfItemNames = hp.getListOfItemNames(getDriver());
+		List<WebElement> listOfItemNames = hp.getListOfItemNames();
 		for (int i = 0; i < listOfItemNames.size(); i++) {
 			if(listOfItemNames.get(i).getText().contains(itemName)) {
-				List<WebElement> listOfAddToCartButton = hp.getAddToCartButton(getDriver());
-				List<WebElement> listOfQuantityInputBox = hp.getQuantityInputBox(getDriver());
+				List<WebElement> listOfAddToCartButton = hp.getAddToCartButton();
+				List<WebElement> listOfQuantityInputBox = hp.getQuantityInputBox();
 				listOfQuantityInputBox.get(i).clear();
 				listOfQuantityInputBox.get(i).sendKeys(quantity);
 				listOfAddToCartButton.get(i).click();
@@ -45,68 +64,85 @@ public class StepDefinations extends Base{
 	
 	@When("I click on cart icon")
 	public void i_click_on_cart_icon() {
-		hp.getCartIcon(getDriver()).click();
+		hp.getCartIcon().click();
 	}
 	
 	@Then("I verify the {string} with {string}  added to the cart")
 	public void i_verify_the_with_added_to_the_cart(String itemName, String quantity) {
-		System.out.println(cp.getProductName(getDriver()).getText());
-		System.out.println(cp.getProductQuantity(getDriver()).getText());
-		Assert.assertTrue(cp.getProductName(getDriver()).getText().contains(itemName));
-		Assert.assertTrue(cp.getProductQuantity(getDriver()).getText().contains(quantity));
+		System.out.println(cp.getProductName().getText());
+		System.out.println(cp.getProductQuantity().getText());
+		Assert.assertTrue(cp.getProductName().getText().contains(itemName));
+		Assert.assertTrue(cp.getProductQuantity().getText().contains(quantity));
 	}
 	
 	@Then("I verify that proceed to checkout button is disabled")
 	public void i_verify_that_proceed_to_checkout_button_is_disabled() {
-		String value = cp.getProceedToCheckoutButton(getDriver()).getDomAttribute("class");
+		String value = cp.getProceedToCheckoutButton().getDomAttribute("class");
 		System.out.println(value);
 		Assert.assertEquals("disabled", value);
 	}
 	
 	@Then("I verify that proceed to checkout button is enabled")
 	public void i_verify_that_proceed_to_checkout_button_is_enabled() {
-		String value = cp.getProceedToCheckoutButton(getDriver()).getDomAttribute("class");
+		String value = cp.getProceedToCheckoutButton().getDomAttribute("class");
 		System.out.println(value);
 		Assert.assertEquals(" ", value);
 	}
 	
 	@When("I click proceed to check out button")
 	public void i_click_proceed_to_check_out_button() {
-		cp.getProceedToCheckoutButton(getDriver()).click();
+		cp.getProceedToCheckoutButton().click();
 	}
 	
 	@Then("I verify user is on place order page")
 	public void i_verify_user_is_on_place_order_page() {
-		Assert.assertTrue(Utils.elementIsVisibleAndClickable(co.getPlaceOrderButtonLocator(), getDriver()));
+		Assert.assertTrue(Utils.elementIsVisibleAndClickable(co.getPlaceOrderButtonLocator(), driver));
 	}
 
 	@When("I click on Place Order button")
 	public void i_click_on_place_order_button() {
-		co.getPlaceOrderButton(getDriver()).click();
+		co.getPlaceOrderButton().click();
 	}
 	
 	@Then("I verify user is on address details page")
 	public void i_verify_user_is_on_address_details_page() {
-		Assert.assertTrue(Utils.elementIsVisible(ap.getChooseCountryTextLocator(), getDriver()));
+		Assert.assertTrue(Utils.elementIsVisible(ap.getChooseCountryTextLocator(), driver));
 	}
 	
-	@When("I select I Select country and Accept the terms and conditions")
+	@When("I Select country and Accept the terms and conditions")
 	public void i_select_i_select_and_accept_the_terms_and_conditions(DataTable dataTable) {
 		 List<Map<String, String>> data = dataTable.asMaps(String.class, String.class);
 		for (Map<String, String> row : data) {
 			String country = row.get("Country");
-			Utils.selectByVisibleText(ap.getSelectDropDown(getDriver()), country);
+			Utils.selectByVisibleText(ap.getSelectDropDown(), country);
 		}
-		ap.getTnCCheckbox(getDriver()).click();
+		ap.getTnCCheckbox().click();
 	}
 	
 	@When("I click on Proceed button")
 	public void i_click_on_proceed_button() {
-		ap.getProceedButon(getDriver()).click();;
+		ap.getProceedButon().click();;
 	}
 	
 	@Then("I validate the success message is displayed")
 	public void i_validate_the_success_message_is_displayed() {
-		ap.getSuccessMessage(getDriver());
+		ap.getSuccessMessage();
+	}
+	
+	@When("I get the {string} price")
+	public void i_get_the_price(String itemName) {
+		List<WebElement> listOfItemNames = hp.getListOfItemNames();
+		for(int i=0;i<listOfItemNames.size();i++) {
+			if(listOfItemNames.get(i).getText().contains(itemName)) {
+				List<WebElement> listOfProductPrice= hp.getProductPrice();
+				String price = listOfProductPrice.get(i).getText();
+				scenarioContext.setContext("expectedPrice", price);
+			}
+		}
+	}
+	@Then("I verify the price of item")
+	public void i_verify_the_price_of_item() {
+	    String actualPrice = co.getItemPrice().getText();
+	    Assert.assertEquals(scenarioContext.getContext("expectedPrice"), actualPrice);
 	}
 }
