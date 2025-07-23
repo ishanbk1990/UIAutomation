@@ -10,6 +10,7 @@ import pageClasses.AddressPage;
 import pageClasses.CartPopUpPage;
 import pageClasses.CheckOutPage;
 import pageClasses.HomePage;
+import pageClasses.TopDeal;
 
 public class TestContext {
 
@@ -17,6 +18,7 @@ public class TestContext {
 	private CartPopUpPage cp;
 	private CheckOutPage co;
 	private AddressPage ap;
+	private TopDeal tp;
 	private WebDriver driver;
 	private ScenarioContext scenarioContext;
 	
@@ -76,6 +78,13 @@ public class TestContext {
             ap = new AddressPage(driver);
         }
         return ap;
+    }
+    
+    public TopDeal getTopDealPage() {
+    	if(tp == null) {
+    		tp = new TopDeal(driver);
+    	}
+    	return tp;
     }
     
     public ScenarioContext getScenarioContext() {

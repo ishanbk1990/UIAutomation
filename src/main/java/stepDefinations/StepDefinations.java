@@ -1,12 +1,21 @@
 package stepDefinations;
 
+import java.time.Duration;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.junit.Assert;
+import org.openqa.selenium.By;
+import org.openqa.selenium.NoSuchElementException;
+import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+
 import io.cucumber.datatable.DataTable;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
@@ -15,6 +24,7 @@ import pageClasses.AddressPage;
 import pageClasses.CartPopUpPage;
 import pageClasses.CheckOutPage;
 import pageClasses.HomePage;
+import pageClasses.TopDeal;
 import resources.DriverManager;
 import resources.ScenarioContext;
 import resources.TestContext;
@@ -29,6 +39,7 @@ public class StepDefinations{
     private final CartPopUpPage cp;
     private final CheckOutPage co;
     private final AddressPage ap;
+    private final TopDeal tp;
     private final ScenarioContext scenarioContext;
     
     public StepDefinations(TestContext context) {
@@ -39,6 +50,7 @@ public class StepDefinations{
     	cp= context.getCartPopUpPage();
     	co = context.getCheckOutPage();
     	ap = context.getAddressPage();
+    	tp = context.getTopDealPage();
     }
 	
 	@Given("I launch the application")
@@ -127,6 +139,7 @@ public class StepDefinations{
 	@Then("I validate the success message is displayed")
 	public void i_validate_the_success_message_is_displayed() {
 		ap.getSuccessMessage();
+		System.out.println(ap.getSuccessMessage().getText());
 	}
 	
 	@When("I get the {string} price")
@@ -144,5 +157,12 @@ public class StepDefinations{
 	public void i_verify_the_price_of_item() {
 	    String actualPrice = co.getItemPrice().getText();
 	    Assert.assertEquals(scenarioContext.getContext("expectedPrice"), actualPrice);
+	}
+	
+	@Given("I Navigate to Top deal Page")
+	public void i_navigate_to_top_deal_page() {
+	    hp.getTopDealLink().click();
+	    Set<String> windowHandles = driver.getWindowHandles();
+	    Utils.switchToWindowWithWebElement(driver,tp.getSearchBoxLocator(),windowHandles);
 	}
 }

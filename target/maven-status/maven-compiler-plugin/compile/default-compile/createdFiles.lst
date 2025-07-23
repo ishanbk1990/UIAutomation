@@ -1,6 +1,10 @@
+resources\ScenarioContext.class
+pageClasses\TopDeal.class
 stepDefinations\Hooks.class
 resources\DriverManager.class
 pageClasses\AddressPage.class
+resources\TestContext.class
+stepDefinations\TopDealStepDefinations.class
 pageClasses\CartPopUpPage.class
 pageClasses\HomePage.class
 pageClasses\CheckOutPage.class

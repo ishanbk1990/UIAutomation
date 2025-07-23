@@ -1,4 +1,4 @@
-@EndToEndFlow
+@TopDeal
 Feature: Validate End to end flow
 
   @regression @sanity
