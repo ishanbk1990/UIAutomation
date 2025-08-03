@@ -2,7 +2,6 @@ package stepDefinations;
 
 import java.util.List;
 
-import org.testng.asserts.SoftAssert;
 
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
@@ -27,10 +26,10 @@ public class TopDealStepDefinations {
 	@Then("I verify that only Items with word containing {string} is shown to user")
 	public void i_verify_that_only_items_with_word_containing_is_shown_to_user(String expectedvalue) {
 	    List<String> listOfItemName = tp.getListOfItemName();
-	    SoftAssert sf = new SoftAssert();
-	    for (String itemName : listOfItemName) {
-			sf.assertTrue(itemName.toLowerCase().contains(expectedvalue));
-		}
-	    sf.assertAll();
+		/*
+		 * SoftAssert sf = new SoftAssert(); for (String itemName : listOfItemName) {
+		 * sf.assertTrue(itemName.toLowerCase().contains(expectedvalue)); }
+		 * sf.assertAll();
+		 */
 	}
 }

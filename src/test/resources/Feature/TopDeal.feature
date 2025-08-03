@@ -1,5 +1,5 @@
 @TopDeal
-Feature: Validate End to end flow
+Feature: Validate Top Deal page
 
   @regression @sanity
   Scenario: Verify the serach functionality working fine in Top deal
