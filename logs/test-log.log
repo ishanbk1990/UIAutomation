@@ -24,3 +24,24 @@
 2025-08-03 21:20:24 [main] INFO  Utils:80 - Element not in this window: B31D259352D6222DF4446F6EE7720DDE
 2025-08-03 21:22:46 [main] INFO  StepDefinations:59 - Application launched
 2025-08-03 21:22:56 [main] INFO  Utils:80 - Element not in this window: 517276470839C8422FCFCF3CA363424B
+2025-08-03 22:03:44 [TestNG-PoolService-6] INFO  StepDefinations:59 - Application launched
+2025-08-03 22:03:46 [TestNG-PoolService-1] INFO  StepDefinations:59 - Application launched
+2025-08-03 22:03:47 [TestNG-PoolService-4] INFO  StepDefinations:59 - Application launched
+2025-08-03 22:03:47 [TestNG-PoolService-3] INFO  StepDefinations:59 - Application launched
+2025-08-03 22:03:48 [TestNG-PoolService-2] INFO  StepDefinations:59 - Application launched
+2025-08-03 22:03:50 [TestNG-PoolService-5] INFO  StepDefinations:59 - Application launched
+2025-08-03 22:03:56 [TestNG-PoolService-6] INFO  Utils:80 - Element not in this window: 35D634C889CC8B7C02F2A794D1BC47A8
+2025-08-03 23:34:53 [TestNG-PoolService-2] INFO  StepDefinations:59 - Application launched
+2025-08-03 23:34:53 [TestNG-PoolService-3] INFO  StepDefinations:59 - Application launched
+2025-08-03 23:34:54 [TestNG-PoolService-1] INFO  StepDefinations:59 - Application launched
+2025-08-03 23:34:56 [TestNG-PoolService-4] INFO  StepDefinations:59 - Application launched
+2025-08-03 23:34:56 [TestNG-PoolService-6] INFO  StepDefinations:59 - Application launched
+2025-08-03 23:34:57 [TestNG-PoolService-5] INFO  StepDefinations:59 - Application launched
+2025-08-03 23:35:08 [TestNG-PoolService-6] INFO  Utils:80 - Element not in this window: 319F28468AFE9E009EF9434964849F51
+2025-08-03 23:39:44 [TestNG-PoolService-5] INFO  StepDefinations:59 - Application launched
+2025-08-03 23:39:44 [TestNG-PoolService-3] INFO  StepDefinations:59 - Application launched
+2025-08-03 23:39:44 [TestNG-PoolService-4] INFO  StepDefinations:59 - Application launched
+2025-08-03 23:39:45 [TestNG-PoolService-1] INFO  StepDefinations:59 - Application launched
+2025-08-03 23:39:46 [TestNG-PoolService-2] INFO  StepDefinations:59 - Application launched
+2025-08-03 23:39:47 [TestNG-PoolService-6] INFO  StepDefinations:59 - Application launched
+2025-08-03 23:39:59 [TestNG-PoolService-6] INFO  Utils:80 - Element not in this window: 0C7555B5F4852AD987053A211ED3EB25

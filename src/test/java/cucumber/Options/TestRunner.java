@@ -1,16 +1,18 @@
 package cucumber.Options;
 
-import org.junit.runner.RunWith;
-import io.cucumber.junit.Cucumber;
-import io.cucumber.junit.CucumberOptions;
+import org.testng.annotations.DataProvider;
 
-@RunWith(Cucumber.class)
-@CucumberOptions(features = "src/test/resources/Feature", glue = {
-				"stepDefinations" }, tags = "@TopDeal", 
-				plugin = {"pretty",
-				        "io.qameta.allure.cucumber7jvm.AllureCucumber7Jvm",
-				        "json:target/jsonReports/cucumber-report.json"
-						})
-public class TestRunner {
+import io.cucumber.testng.AbstractTestNGCucumberTests;
+import io.cucumber.testng.CucumberOptions;
 
+@CucumberOptions(features = "src/test/resources/Feature", glue = "stepDefinations", plugin = { "pretty",
+		"json:target/jsonReports/cucumber-report.json", "html:target/cucumber-html-report.html",
+		"com.aventstack.extentreports.cucumber.adapter.ExtentCucumberAdapter:"}, tags = "@regression")
+public class TestRunner extends AbstractTestNGCucumberTests {
+	
+	@Override
+	@DataProvider(parallel = true)
+	public Object[][] scenarios() {
+	    return super.scenarios();
+	}
 }
