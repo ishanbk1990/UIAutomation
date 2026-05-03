@@ -5,6 +5,8 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
+import resources.Utils;
+
 public class HomePage {
 
 	private WebDriver driver;
@@ -41,5 +43,23 @@ public class HomePage {
 	
 	public List<WebElement> getProductPrice() {
 		return driver.findElements(productPrice);
+	}
+	
+	public void addGivenItemAndQuantityToCart(String itemName, String quantity) {
+		List<WebElement> listOfItemNames = getListOfItemNames();
+		for (int i = 0; i < listOfItemNames.size(); i++) {
+			if(listOfItemNames.get(i).getText().contains(itemName)) {
+				List<WebElement> listOfAddToCartButton = getAddToCartButton();
+				List<WebElement> listOfQuantityInputBox = getQuantityInputBox();
+				listOfQuantityInputBox.get(i).clear();
+				listOfQuantityInputBox.get(i).sendKeys(quantity);
+				listOfAddToCartButton.get(i).click();
+				break;
+			}
+		}
+	}
+	
+	public void clickCartIcon() {
+		Utils.waitForElementToBeClickableAndClick(addToCartButton, driver);
 	}
 }

@@ -61,22 +61,12 @@ public class StepDefinations{
 
 	@When("I add {string} and {string}")
 	public void i_add_and(String itemName, String quantity) {
-		List<WebElement> listOfItemNames = hp.getListOfItemNames();
-		for (int i = 0; i < listOfItemNames.size(); i++) {
-			if(listOfItemNames.get(i).getText().contains(itemName)) {
-				List<WebElement> listOfAddToCartButton = hp.getAddToCartButton();
-				List<WebElement> listOfQuantityInputBox = hp.getQuantityInputBox();
-				listOfQuantityInputBox.get(i).clear();
-				listOfQuantityInputBox.get(i).sendKeys(quantity);
-				listOfAddToCartButton.get(i).click();
-				break;
-			}
-		}
+		hp.addGivenItemAndQuantityToCart(itemName, quantity);
 	}
 	
 	@When("I click on cart icon")
 	public void i_click_on_cart_icon() {
-		hp.getCartIcon().click();
+		hp.clickCartIcon();
 	}
 	
 	@Then("I verify the {string} with {string}  added to the cart")
