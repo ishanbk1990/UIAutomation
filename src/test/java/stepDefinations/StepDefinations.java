@@ -143,6 +143,7 @@ public class StepDefinations{
 			}
 		}
 	}
+	
 	@Then("I verify the price of item")
 	public void i_verify_the_price_of_item() {
 	    String actualPrice = co.getItemPrice().getText();

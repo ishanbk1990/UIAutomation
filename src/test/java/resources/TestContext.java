@@ -19,7 +19,6 @@ public class TestContext {
 	private CheckOutPage co;
 	private AddressPage ap;
 	private TopDeal tp;
-	private WebDriver driver;
 	private ScenarioContext scenarioContext;
 	
 	public TestContext() {
@@ -34,55 +33,50 @@ public class TestContext {
 		System.out.println(browser);
 		switch (browser) {
 		case "edge":
-			driver = new EdgeDriver();
+			DriverManager.setDriver(new EdgeDriver());
 			break;
 		case "chrome":
-			driver = new ChromeDriver();
+			DriverManager.setDriver(new ChromeDriver());
 			break;
 		default:
-			driver = new ChromeDriver();
+			DriverManager.setDriver(new ChromeDriver());
 		}
-		DriverManager.setDriver(driver);
 		DriverManager.getDriver().manage().window().maximize();
 		DriverManager.getDriver().manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
 		DriverManager.getDriver().manage().timeouts().pageLoadTimeout(Duration.ofSeconds(20));
 	}
 
-    public WebDriver getDriver() {
-        return driver;
-    }
-
     public HomePage getHomePage() {
         if (hp == null) {
-            hp = new HomePage(driver);
+            hp = new HomePage(DriverManager.getDriver());
         }
         return hp;
     }
 
     public CartPopUpPage getCartPopUpPage() {
         if (cp == null) {
-            cp = new CartPopUpPage(driver);
+            cp = new CartPopUpPage(DriverManager.getDriver());
         }
         return cp;
     }
 
     public CheckOutPage getCheckOutPage() {
         if (co == null) {
-            co = new CheckOutPage(driver);
+            co = new CheckOutPage(DriverManager.getDriver());
         }
         return co;
     }
 
     public AddressPage getAddressPage() {
         if (ap == null) {
-            ap = new AddressPage(driver);
+            ap = new AddressPage(DriverManager.getDriver());
         }
         return ap;
     }
     
     public TopDeal getTopDealPage() {
     	if(tp == null) {
-    		tp = new TopDeal(driver);
+    		tp = new TopDeal(DriverManager.getDriver());
     	}
     	return tp;
     }

@@ -6,6 +6,7 @@ import org.openqa.selenium.TakesScreenshot;
 import io.cucumber.java.After;
 import io.cucumber.java.Before;
 import io.cucumber.java.Scenario;
+import resources.DriverManager;
 import resources.TestContext;
 
 public class Hooks{
@@ -24,10 +25,10 @@ public class Hooks{
 	@After
 	public void tearDown(Scenario scenario) {
 		 if (scenario.isFailed()) {
-	            byte[] screenshot = ((TakesScreenshot) contex.getDriver()).getScreenshotAs(OutputType.BYTES);
+	            byte[] screenshot = ((TakesScreenshot) DriverManager.getDriver()).getScreenshotAs(OutputType.BYTES);
 	            scenario.attach(screenshot, "image/png", "Failed Test Screenshot");
 	        }
-		contex.getDriver().quit();
+		DriverManager.quitDriver();
 	}
 
 }

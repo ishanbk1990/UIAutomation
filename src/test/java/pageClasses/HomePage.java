@@ -60,6 +60,7 @@ public class HomePage {
 	}
 	
 	public void clickCartIcon() {
-		Utils.waitForElementToBeClickableAndClick(addToCartButton, driver);
+		getCartIcon().click();
+		//Utils.waitForElementToBeClickableAndClick(cartIcon, driver);
 	}
 }
